@@ -1,0 +1,51 @@
+int data = 3;
+int strobe = 2;
+int clock = 4;
+const int DELAY = 12;
+byte state, prevState;
+
+void setup() 
+{
+  Serial.begin(9600);
+  pinMode(strobe, OUTPUT);
+  pinMode(clock, OUTPUT);
+  pinMode(data, INPUT);
+}
+
+void loop() 
+{
+  //find new state and compare it with the previous state
+  state = getButtons();
+  if(state ^ prevState) //state changed
+  {
+    prevState = state;
+    //Use write instead of print to send the actual byte value
+    Serial.write(state);
+  }
+}
+
+byte getButtons()
+{
+  strobeCall();
+  byte ret = 0;
+  for(int i = 0; i < 8; i++)
+  {
+    ret |= (digitalRead(data) << i);
+    clockCall();
+  }
+  return ~ret; //I prefer the 1=Pressed encoding :)
+}
+
+void clockCall()
+{
+  digitalWrite(clock, HIGH);
+  delayMicroseconds(DELAY);
+  digitalWrite(clock, LOW);
+}
+
+void strobeCall()
+{
+  digitalWrite(strobe, HIGH);
+  delayMicroseconds(DELAY);
+  digitalWrite(strobe, LOW);
+}
