@@ -1,4 +1,3 @@
-package arduino;
 
 import gnu.io.CommPortIdentifier;
 import gnu.io.PortInUseException;
