@@ -1,7 +1,7 @@
 # NES-Arduino-Mouse
 A fun little Arduino project which uses an NES controller as a computer mouse.  This particular implementation uses an Arduino UNO and is configured for Windows, but should be easy to get working with other hardware.
 
-![alt tag](http://www.imgur.com/MSo4UDB.jpg)
+![NES mouse hooked up to an Arduino UNO](http://www.imgur.com/MSo4UDB.jpg)
 
 # Background
 The NES controller uses a simple 8-bit shift register to store and transmit the state of its 8 buttons.  This means that the data for all 8 buttons
